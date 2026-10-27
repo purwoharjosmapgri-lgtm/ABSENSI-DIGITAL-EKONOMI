@@ -1,0 +1,21 @@
+// Ganti teks di dalam tanda kutip ini dengan URL Web App Anda dari Tahap 2
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTa8_8BkhU2sQNXat-kJXjer9eyBklxrRmSCBwXyteu6LKQGOiVaoSjVNrc9U9QUXp/exec";
+
+// Contoh fungsi untuk mengirim data absensi ke Google Sheets
+async function kirimAbsensiKeSheets(arrayDataAbsensi) {
+  try {
+    let response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors", // Diperlukan untuk lintas domain Google Scripts
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action: "saveAbsensi",
+        records: arrayDataAbsensi
+      })
+    });
+    alert("Data absensi berhasil dikirim ke Google Sheets!");
+  } catch (error) {
+    console.error("Gagal menyimpan:", error);
+    alert("Terjadi kesalahan saat menyimpan data.");
+  }
+}
